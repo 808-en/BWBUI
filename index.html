@@ -1,70 +1,427 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideas For Bloxd and BloxdHub</title>
+    <meta name="theme-color" content="#f5f7fc">
+    <title>Ideas for Bloxd & BloxdHub</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
+            background: #f5f7fc;
+            color: #252b3a;
+        }
+
+        header {
+            text-align: center;
+            padding: 55px 20px 30px;
+        }
+
+        header h1 {
+            font-size: clamp(30px, 5vw, 44px);
+            margin: 0 0 12px;
+            letter-spacing: -1.5px;
+        }
+
+        header p {
+            color: #737d91;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 550px;
+        }
+
+        .switch-wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-            flex-direction: column;
-            text-align: center;
+            padding: 15px 20px 35px;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 40px;
-        }
-
-        .button-container {
+        .switch {
             display: flex;
-            gap: 20px;
+            padding: 5px;
+            background: #e8ebf3;
+            border-radius: 12px;
+            gap: 5px;
+            width: min(100%, 390px);
         }
 
-        .project-button {
-            padding: 15px 30px;
-            font-size: 18px;
-            color: white;
-            background-color: #007bff;
+        .switch button {
+            flex: 1;
+            padding: 13px 10px;
             border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            border-radius: 9px;
+            background: transparent;
+            color: #697287;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
         }
 
-        .project-button:hover {
-            background-color: #0056b3;
+        .switch button.active {
+            background: white;
+            color: #2878ed;
+            box-shadow: 0 2px 8px #18274712;
+        }
+
+        main {
+            width: min(900px, calc(100% - 35px));
+            margin: 0 auto;
+            padding-bottom: 70px;
+        }
+
+        .section-heading {
+            margin-bottom: 25px;
+        }
+
+        .section-heading h2 {
+            font-size: 25px;
+            margin: 0 0 8px;
+        }
+
+        .section-heading p {
+            color: #7a8497;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .idea-card {
+            background: white;
+            border: 1px solid #e9edf4;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px #24334b08;
+        }
+
+        .idea-image {
+            height: 220px;
+            background: linear-gradient(135deg, #e5edff, #dce7fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8196bd;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: .5px;
+        }
+
+        .hub .idea-image {
+            background: linear-gradient(135deg, #eee6ff, #e2dcfa);
+            color: #9382bf;
+        }
+
+        .idea-content {
+            padding: 25px 28px 28px;
+        }
+
+        .idea-number {
+            color: #2878ed;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hub .idea-number {
+            color: #8159d6;
+        }
+
+        .idea-content h3 {
+            font-size: 22px;
+            margin: 9px 0 13px;
+        }
+
+        .idea-content p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #697287;
+            margin: 0 0 15px;
+        }
+
+        .idea-content h4 {
+            font-size: 15px;
+            margin: 22px 0 8px;
+        }
+
+        .code {
+            display: block;
+            background: #f3f5fa;
+            border: 1px solid #e8ebf2;
+            padding: 13px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            overflow-x: auto;
+            color: #42516b;
+            margin: 15px 0;
+        }
+
+        .idea-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .idea-links a {
+            text-decoration: none;
+            background: #edf3ff;
+            color: #2878ed;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .idea-links a:hover {
+            background: #dce9ff;
+        }
+
+        .hub .idea-links a {
+            background: #f0ebff;
+            color: #8159d6;
+        }
+
+        .hub .idea-links a:hover {
+            background: #e4dafa;
+        }
+
+        .idea-details {
+            border-left: 3px solid #c9dcff;
+            padding-left: 14px;
+            margin-top: 20px;
+        }
+
+        .hub .idea-details {
+            border-color: #d9caff;
+        }
+
+        .idea-details p {
+            margin-bottom: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #929bad;
+            font-size: 13px;
+            border-top: 1px solid #e8ebf2;
+        }
+
+        @media (max-width: 550px) {
+            header {
+                padding-top: 40px;
+            }
+
+            .idea-content {
+                padding: 21px;
+            }
+
+            .idea-image {
+                height: 170px;
+            }
+
+            .idea-content h3 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Bloxd.io Ideas</h1>
-    <h2>1. New api code for building blocks</h2>
-        <h3>Go to "3D Pyramid Drawer" to simulate how this code would work.</h3>
-            <p>Using the following code, players (or World Code) can build not just straight shapes (squares, lines, and rectangles), but also triangular shapes like triangles and six-sided stars. This could also be followed by more updates to build pther shapes, automatically. The only downside to this is that it may take up a significant amount of loading time to do-as a basic AI would literally be drawing a triangle.</p>
-                <p><code>api.setBlockTri(pos1, pos2, pos3, pos4, blockName)</code></p>
+<header>
+    <h1>Ideas for Bloxd & BloxdHub</h1>
+    <p>A collection of feature ideas, improvements, and experiments that could make Bloxd.io and BloxdHub even better.</p>
+</header>
 
-    <div class="button-container">
-        <a href="2d.html" class="project-button">2D Triangle Drawer</a>
-        <a href="3d.html" class="project-button">3D Pyramid Drawer</a>
+<div class="switch-wrapper">
+    <div class="switch">
+        <button class="active" id="bloxdBtn" onclick="showSection('bloxd')">
+            Bloxd.io
+        </button>
+        <button id="hubBtn" onclick="showSection('hub')">
+            BloxdHub
+        </button>
     </div>
-----------------------------------------------------------------------------------------------
-    <h2>2. Bloxdhub Idea: schematic file previewer and converter</h2>
-        <h3>Go to "3D Pyramid Drawer" to simulate how this code would work.</h3>
-            <p>Using the following code, players (or World Code) can build not just straight shapes (squares, lines, and rectangles), but also triangular shapes like triangles and six-sided stars. This could also be followed by more updates to build pther shapes, automatically. The only downside to this is that it may take up a significant amount of loading time to do-as a basic AI would literally be drawing a triangle.</p>
-                <p><code>api.setBlockTri(pos1, pos2, pos3, pos4, blockName)</code></p>
+</div>
 
-    <div class="button-container">
-        <a href="2d.html" class="project-button">2D Triangle Drawer</a>
-        <a href="3d.html" class="project-button">3D Pyramid Drawer</a>
-    </div>
+<main>
+
+    <section id="bloxdSection">
+        <div class="section-heading">
+            <h2>Bloxd.io Ideas</h2>
+            <p>Ideas focused on improving gameplay, World Code, building, and creative possibilities.</p>
+        </div>
+
+        <article class="idea-card">
+            <div class="idea-image">
+                IMAGE PLACEHOLDER
+            </div>
+
+            <div class="idea-content">
+                <span class="idea-number">Idea #1 · World Code</span>
+                <h3>New API Functions for Building Shapes</h3>
+
+                <p>
+                    Currently, building structures through World Code can involve
+                    creating individual blocks or using existing functions to
+                    generate relatively simple shapes. However, more advanced
+                    structures, especially triangular ones, can be difficult and
+                    time-consuming to create.
+                </p>
+
+                <p>
+                    A possible solution would be to introduce new API functions
+                    that allow players to generate shapes using multiple
+                    coordinates. This could make it much easier to build
+                    triangles, pyramids, stars, and other complex geometric
+                    structures without manually calculating every individual
+                    block position.
+                </p>
+
+                <h4>How could it work?</h4>
+
+                <p>
+                    A function could accept several coordinate positions,
+                    determine the area or shape between them, and automatically
+                    place the selected block type wherever necessary.
+                </p>
+
+                <code class="code">api.setBlockTri(pos1, pos2, pos3, blockName)</code>
+
+                <p>
+                    For example, this function could generate a filled
+                    triangular surface using three corner positions. Additional
+                    functions could later support more complicated shapes,
+                    including pyramids, polygons, and custom 3D structures.
+                </p>
+
+                <div class="idea-details">
+                    <h4>Potential benefits and limitations</h4>
+                    <p>
+                        This would make building tools more flexible, reduce
+                        repetitive World Code, and allow players to create
+                        structures that would otherwise require complicated
+                        scripts. However, generating large or complicated
+                        shapes could require significant processing time.
+                        Optimized algorithms and block limits could help
+                        prevent performance problems.
+                    </p>
+                </div>
+
+                <div class="idea-links">
+                    <a href="2d.html">2D Triangle Drawer</a>
+                    <a href="3d.html">3D Pyramid Drawer</a>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section id="hubSection" class="hidden hub">
+        <div class="section-heading">
+            <h2>BloxdHub Ideas</h2>
+            <p>Ideas focused on improving the BloxdHub website, its tools, and the overall user experience.</p>
+        </div>
+
+        <article class="idea-card">
+            <div class="idea-image">
+                IMAGE PLACEHOLDER
+            </div>
+
+            <div class="idea-content">
+                <span class="idea-number">Idea #1 · File Tools</span>
+                <h3>Schematic File Previewer & Converter</h3>
+
+                <p>
+                    Working with schematic files can sometimes be inconvenient,
+                    especially when users want to inspect a build before
+                    downloading or importing it. It can also be difficult to
+                    know whether a file is compatible with the intended
+                    application or building tool.
+                </p>
+
+                <p>
+                    BloxdHub could introduce a built-in schematic previewer
+                    that allows users to upload a supported schematic file and
+                    view its contents directly on the website. Instead of
+                    downloading a file and opening it in another program,
+                    users could quickly inspect the structure in an interactive
+                    3D preview.
+                </p>
+
+                <h4>How could it work?</h4>
+
+                <p>
+                    Users would upload or drag and drop a schematic file into
+                    the previewer. The website would read the file's block
+                    information, reconstruct the structure, and display it in
+                    a 3D viewer. Users could rotate the camera, zoom in, and
+                    inspect the build from different angles.
+                </p>
+
+                <h4>File conversion</h4>
+
+                <p>
+                    The tool could also include a conversion feature, allowing
+                    supported schematic formats to be converted into other
+                    compatible formats. This would make it easier to transfer
+                    builds between different tools and building environments.
+                </p>
+
+                <div class="idea-details">
+                    <h4>Potential benefits and limitations</h4>
+                    <p>
+                        A previewer would help users check their builds before
+                        importing them, while conversion tools could improve
+                        compatibility and accessibility. The main challenge
+                        would be supporting different schematic formats and
+                        handling large files efficiently. Clear file size
+                        limits and format compatibility information would
+                        make the tool easier to use.
+                    </p>
+                </div>
+
+                <div class="idea-links">
+                    <a href="3d.html">View 3D Preview Concept</a>
+                </div>
+            </div>
+        </article>
+    </section>
+
+</main>
+
+<footer>
+    Ideas for Bloxd & BloxdHub · Feature concepts and suggestions
+</footer>
+
+<script>
+    function showSection(section) {
+        const bloxdSection = document.getElementById('bloxdSection');
+        const hubSection = document.getElementById('hubSection');
+        const bloxdBtn = document.getElementById('bloxdBtn');
+        const hubBtn = document.getElementById('hubBtn');
+
+        const showBloxd = section === 'bloxd';
+
+        bloxdSection.classList.toggle('hidden', !showBloxd);
+        hubSection.classList.toggle('hidden', showBloxd);
+
+        bloxdBtn.classList.toggle('active', showBloxd);
+        hubBtn.classList.toggle('active', !showBloxd);
+    }
+</script>
 
 </body>
 </html>
